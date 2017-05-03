@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="Entity.HCollectionsEntity" table="h_collections" schema="aaa">
+        <id name="haidaxueSn">
+            <column name="haidaxue_sn" sql-type="varchar(15)" length="15"/>
+        </id>
+        <property name="questionSn">
+            <column name="question_sn" sql-type="varchar(15)" length="15" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
