@@ -22,8 +22,59 @@
 		pattern : 'mF_fancy'
 	})
 </script>
+	<script type="application/javascript">
+		//就是做一个Ajax请操作
+        function loadXMLDoc()
+        {
+            var xmlhttp;
+            var jsonArray;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    jsonArray=xmlhttp.responseText;//we get json Data here
+                }
+            }
+
+            xmlhttp.open("GET","/ajax/demo_get.asp",true);
+            xmlhttp.send();
+            showQuestion("showQuestions",jsonArray);//then tansform it to showQuestion function
+        }
+
+	</script>
+	<script>
+		showQuestion(obj,json)
+        {
+            var ul = document.getElementById(obj);
+			var jsonArray=json;//get json data,
+			//eval 进行相关操作。
+            //添加 li
+            for (var i = 0; i < cars.length; i++){
+				var li = document.createElement("li");
+				var a=document.createElement("a");
+				var img=document.createElement("")
+				//添加 img
+				var para = document.createElement("p");
+				var node = document.createTextNode("这是新段落。");
+				para.appendChild(node);
+				li.appendChild(para);
+				ul.appendChild(li);
+        	}
+		}
+
+
+
+	</script>
 </head>
-<body>
+<body onload="showQuestions('showQuestions')">
 <div data-role="page" data-theme="a" data-title="main" id="main">
 		<!--page开始 -->
 		<div data-role="header" data-position="fixed">
@@ -99,40 +150,16 @@
 		
 		
 		<div data-role="ui-content">
-			<ul data-role="listview">
-				<!-- 商品循环开始 -->
-		
-				<li><a href="details.jsp"> 
-				<img src="../images/t4.jpg" width="120" height="90"
-						border="1" />
-						<h2>类型: 学习规划</h2>
-						<p>
-							概述: 啊啊啊好烦啊到底要不要选双学位
-						</p>
-				</a> </li>
-				<li><a href="details.jsp"> 
-				<img src="../images/t3.jpg" width="120" height="90"
-						border="1" />
-						<h2>类型: 填报志愿</h2>
-						<p>
-							 概述: 我妈让我学医 我爸要我学机械要死了要死了咋办啊我自己啥也不知道啊
-						</p>
-				</a> </li>
-				<li><a><img src="../images/t5.jpg" width="120" height="90"
-						border="1" />
-						<h2>类型: 填报志愿</h2>
-						<p>
-							 概述: 我妈让我学医 我爸要我学机械要死了要死了咋办啊我自己啥也不知道啊
-						</p>
-				</a> </li>
-				<li><a>
+			<ul data-role="listview" id="showQuestions">
+				<!-- 循环开始 -->
+					<li><a>
 				<img src="../images/t6.jpg" width="120" height="90"
 						border="1" />
 						<h2>类型: 填报志愿</h2>
 						<p>
 							 概述: 我妈让我学医 我爸要我学机械要死了要死了咋办啊我自己啥也不知道啊
 						</p>
-				</a> </li>
+				</a></li>
 			</ul>
 		</div>
 		<!-- ui-content 结束 -->

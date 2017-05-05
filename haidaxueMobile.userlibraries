@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="antlr-2.7.7" />
+  <library name="cdi-api-1.1" />
+  <library name="Java EE 6-Java EE 6">
+    <archive path="E:/Web/Servlet/lib/javax.ejb.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.transaction.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.resource.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.jms.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.annotation.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.persistence.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.servlet.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.servlet.jsp.jar" />
+    <archive path="E:/Web/Servlet/lib/javax.servlet.jsp.jstl.jar" />
+  </library>
+  <library name="mysql-connector-java-5.1.39-bin">
+    <archive path="E:/Web/Servlet/lib/mysql-connector-java-5.1.39-bin.jar" />
+    <archive path="E:/Haidaxue/lib/el-api-2.2.jar" />
+    <archive path="E:/Haidaxue/lib/antlr-2.7.7.jar" />
+    <archive path="E:/Haidaxue/lib/cdi-api-1.1.jar" />
+    <archive path="E:/Haidaxue/lib/dom4j-1.6.1.jar" />
+    <archive path="E:/Haidaxue/lib/javax.inject-1.jar" />
+    <archive path="E:/Haidaxue/lib/jsr250-api-1.0.jar" />
+    <archive path="E:/Haidaxue/lib/classmate-1.3.0.jar" />
+    <archive path="E:/Haidaxue/lib/jandex-2.0.0.Final.jar" />
+    <archive path="E:/Haidaxue/lib/javassist-3.20.0-GA.jar" />
+    <archive path="E:/Haidaxue/lib/jboss-logging-3.3.0.Final.jar" />
+    <archive path="E:/Haidaxue/lib/hibernate-core-5.2.3.Final.jar" />
+    <archive path="E:/Haidaxue/lib/geronimo-jta_1.1_spec-1.1.1.jar" />
+    <archive path="E:/Haidaxue/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar" />
+    <archive path="E:/Haidaxue/lib/hibernate-commons-annotations-5.0.1.Final.jar" />
+    <archive path="E:/Haidaxue/lib/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar" />
+  </library>
+  <library name="scala-sdk-2.12.2">
+    <archive path="E:/scala/lib/scala-library.jar" />
+    <archive path="E:/scala/lib/scala-parser-combinators_2.12-1.0.5.jar" />
+    <archive path="E:/scala/lib/scala-reflect.jar" />
+    <archive path="E:/scala/lib/scala-swing_2.12-2.0.0.jar" />
+    <archive path="E:/scala/lib/scala-xml_2.12-1.0.6.jar" />
+  </library>
+</eclipse-userlibraries>
+
