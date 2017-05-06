@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dao.HAnswersDao;
+import Dao.HUsersDao;
+import Entity.HUsersEntity;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @WebServlet("/SpecialProfileServlet")
 public class SpecialProfileServlet extends HttpServlet {
@@ -18,9 +22,16 @@ public class SpecialProfileServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HAnswersDao hAnswersDao = new HAnswersDao();
-	    List specialProfileList = hAnswersDao.getSpecialProfile();
-	    request.getSession().setAttribute("specialProfileList", specialProfileList);
+		HUsersDao hAnswersDao = new HUsersDao();
+	    List<HUsersEntity> specialProfileList = hAnswersDao.getSpecialProfile();
+	    JSONArray jsonArray = new JSONArray();
+	    for(HUsersEntity hue : specialProfileList){
+	    	JSONObject jsonobject = JSONObject.fromObject(hue);
+	    	jsonArray.add(jsonobject);
+	    }
+	    response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write(jsonArray.toString());
 	}
 
 	@Override

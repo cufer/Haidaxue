@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import Dao.HQuestionDao;
 import Entity.HQuestionEntity;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
@@ -19,12 +22,19 @@ public class SearchServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String questionLable = request.getParameter("questionLable");
+	    String questionLabel = request.getParameter("questionLabel");
 	    HQuestionEntity hQuestionEntity = new HQuestionEntity();
-	    hQuestionEntity.setQuestionLable(questionLable);
+	    hQuestionEntity.setQuestionLabel(questionLabel);
 	    HQuestionDao hQuestionDao = new HQuestionDao();
-	    List questionQueryList = hQuestionDao.getQuestionByQuestion_Label(hQuestionEntity);
-	    request.getSession().setAttribute("questionQueryList", questionQueryList);
+	    List<HQuestionEntity> questionQueryList = hQuestionDao.getQuestionByQuestion_Label(hQuestionEntity);
+	    JSONArray jsonArray = new JSONArray();
+	    for(HQuestionEntity hqe : questionQueryList){
+	    	JSONObject jsonobject = JSONObject.fromObject(hqe);
+	    	jsonArray.add(jsonobject);
+	    }
+	    response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write(jsonArray.toString());
 	}
 
 	@Override

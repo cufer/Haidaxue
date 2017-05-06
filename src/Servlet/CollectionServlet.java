@@ -10,26 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dao.HAnswersDao;
-import Entity.HAnswersEntity;
+import Dao.HCollectionsDao;
+import Entity.HCollectionsEntity;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-@WebServlet("/SpecialDatial")
-public class SpecialDatial extends HttpServlet {
+@WebServlet("/CollectionServlet")
+public class CollectionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String haidaxueSn = request.getParameter("haidaxueSn");
-		HAnswersEntity hAnswersEntity = new HAnswersEntity();
-	    hAnswersEntity.setHaidaxueSn(haidaxueSn);
-	    HAnswersDao hAnswersDao = new HAnswersDao();
-	    List<HAnswersEntity> specialDetailList = hAnswersDao.getAnswerByHaidaxue_sn(hAnswersEntity);
+	    HCollectionsDao hCollectionsDao = new HCollectionsDao();
+	    List<HCollectionsEntity> collectionList = hCollectionsDao.getAllCollection();
+
 	    JSONArray jsonArray = new JSONArray();
-	    for(HAnswersEntity hae : specialDetailList){
-	    	JSONObject jsonobject = JSONObject.fromObject(hae);
+	    for(HCollectionsEntity hce : collectionList){
+	    	JSONObject jsonobject = JSONObject.fromObject(hce);
 	    	jsonArray.add(jsonobject);
 	    }
 	    response.setContentType("application/json; charset=utf-8");

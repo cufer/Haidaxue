@@ -10,26 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dao.HAnswersDao;
-import Entity.HAnswersEntity;
+import Dao.HQuestionDao;
+import Entity.HQuestionEntity;
+import Entity.HUsersEntity;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-@WebServlet("/SpecialDatial")
-public class SpecialDatial extends HttpServlet {
+@WebServlet("/QuestionByHaidaxueSNServlet")
+public class QuestionByHaidaxueSNServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String haidaxueSn = request.getParameter("haidaxueSn");
-		HAnswersEntity hAnswersEntity = new HAnswersEntity();
-	    hAnswersEntity.setHaidaxueSn(haidaxueSn);
-	    HAnswersDao hAnswersDao = new HAnswersDao();
-	    List<HAnswersEntity> specialDetailList = hAnswersDao.getAnswerByHaidaxue_sn(hAnswersEntity);
+		HUsersEntity hUsersEntity = new HUsersEntity();
+		hUsersEntity.setHaidaxueSn(haidaxueSn);
+
+		HQuestionDao hQuestionDao = new HQuestionDao();
+	    List<HQuestionEntity> myQuestionList = hQuestionDao.getQusetionByUserHaidaxue_sn(hUsersEntity);
+
 	    JSONArray jsonArray = new JSONArray();
-	    for(HAnswersEntity hae : specialDetailList){
-	    	JSONObject jsonobject = JSONObject.fromObject(hae);
+	    for(HQuestionEntity hqe : myQuestionList){
+	    	JSONObject jsonobject = JSONObject.fromObject(hqe);
 	    	jsonArray.add(jsonobject);
 	    }
 	    response.setContentType("application/json; charset=utf-8");

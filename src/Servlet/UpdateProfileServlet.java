@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import Dao.HUsersDao;
 import Entity.HUsersEntity;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @WebServlet("/UpdateProfileServlet")
 public class UpdateProfileServlet extends HttpServlet {
@@ -44,8 +47,14 @@ public class UpdateProfileServlet extends HttpServlet {
 		hUsersEntity.setHaidaxueSn(haidaxueSn);
 
 	    HUsersDao hUsersDao = new HUsersDao();
-	    hUsersDao.update(hUsersEntity);
-//	    request.getSession().setAttribute("updateResult", true);
+	    boolean updateResult = hUsersDao.update(hUsersEntity);
+
+	    JSONArray jsonArray = new JSONArray();
+    	JSONObject jsonobject = JSONObject.fromObject(updateResult);
+    	jsonArray.add(jsonobject);
+	    response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write(jsonArray.toString());
 	}
 
 	@Override

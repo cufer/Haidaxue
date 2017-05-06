@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import Dao.HQuestionDao;
 import Entity.HQuestionEntity;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @WebServlet("/DetailServlet")
 public class DetailServlet extends HttpServlet {
@@ -23,8 +26,15 @@ public class DetailServlet extends HttpServlet {
 	    HQuestionEntity hQuestionEntity = new HQuestionEntity();
 	    hQuestionEntity.setQuestionSn(questionSn);
 	    HQuestionDao hQuestionDao = new HQuestionDao();
-	    List questionDetailList = hQuestionDao.getQuestionByQuestion_sn(hQuestionEntity);
-	    request.getSession().setAttribute("questionDetailList", questionDetailList);
+	    List<HQuestionEntity> questionDetailList = hQuestionDao.getQuestionByQuestion_sn(hQuestionEntity);
+	    JSONArray jsonArray = new JSONArray();
+	    for(HQuestionEntity hqe : questionDetailList){
+	    	JSONObject jsonobject = JSONObject.fromObject(hqe);
+	    	jsonArray.add(jsonobject);
+	    }
+	    response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write(jsonArray.toString());
 	}
 
 	@Override
