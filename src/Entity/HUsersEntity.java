@@ -1,9 +1,10 @@
 package Entity;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 /**
- * Created by panyunyi on 2017/5/3.
+ * Created by panyunyi on 2017/5/6.
  */
 @Entity
 @Table(name = "h_users", schema = "aaa", catalog = "")
@@ -22,6 +23,9 @@ public class HUsersEntity {
     private String userLabel;
     private String originSchool;
     private String haidaxueSn;
+    private Integer level;
+    private String userType;
+    private byte[] userPic;
 
     @Basic
     @Column(name = "user_name", nullable = true, length = 30)
@@ -163,6 +167,36 @@ public class HUsersEntity {
         this.haidaxueSn = haidaxueSn;
     }
 
+    @Basic
+    @Column(name = "level", nullable = true)
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    @Basic
+    @Column(name = "user_type", nullable = true, length = 3)
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    @Basic
+    @Column(name = "user_pic", nullable = true)
+    public byte[] getUserPic() {
+        return userPic;
+    }
+
+    public void setUserPic(byte[] userPic) {
+        this.userPic = userPic;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -187,6 +221,9 @@ public class HUsersEntity {
         if (userLabel != null ? !userLabel.equals(that.userLabel) : that.userLabel != null) return false;
         if (originSchool != null ? !originSchool.equals(that.originSchool) : that.originSchool != null) return false;
         if (haidaxueSn != null ? !haidaxueSn.equals(that.haidaxueSn) : that.haidaxueSn != null) return false;
+        if (level != null ? !level.equals(that.level) : that.level != null) return false;
+        if (userType != null ? !userType.equals(that.userType) : that.userType != null) return false;
+        if (!Arrays.equals(userPic, that.userPic)) return false;
 
         return true;
     }
@@ -207,6 +244,9 @@ public class HUsersEntity {
         result = 31 * result + (userLabel != null ? userLabel.hashCode() : 0);
         result = 31 * result + (originSchool != null ? originSchool.hashCode() : 0);
         result = 31 * result + (haidaxueSn != null ? haidaxueSn.hashCode() : 0);
+        result = 31 * result + (level != null ? level.hashCode() : 0);
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(userPic);
         return result;
     }
 }

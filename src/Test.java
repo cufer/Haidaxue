@@ -1,7 +1,5 @@
 import Dao.HAnswersDao;
-import Dao.HUsersDao;
 import Entity.HAnswersEntity;
-import Entity.HUsersEntity;
 
 import java.util.List;
 

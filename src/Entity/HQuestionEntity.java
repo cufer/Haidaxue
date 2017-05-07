@@ -7,10 +7,10 @@ import java.sql.Date;
  * Created by panyunyi on 2017/5/3.
  */
 @Entity
-@Table(name = "h_question", schema = "aaa", catalog = "")
+@Table(name = "h_question", schema = "aaa")
 public class HQuestionEntity {
     private String questionSn;
-    private String questionLable;
+    private String questionLabel;
     private String haidaxueSn;
     private String questionContent;
     private Boolean questionAnonymity;
@@ -28,13 +28,13 @@ public class HQuestionEntity {
     }
 
     @Basic
-    @Column(name = "question_lable", nullable = true, length = 30)
-    public String getQuestionLable() {
-        return questionLable;
+    @Column(name = "question_label", nullable = true, length = 30)
+    public String getQuestionLabel() {
+        return questionLabel;
     }
 
-    public void setQuestionLable(String questionLable) {
-        this.questionLable = questionLable;
+    public void setQuestionLabel(String questionLabel) {
+        this.questionLabel = questionLabel;
     }
 
     @Basic
@@ -95,7 +95,7 @@ public class HQuestionEntity {
         HQuestionEntity that = (HQuestionEntity) o;
 
         if (questionSn != null ? !questionSn.equals(that.questionSn) : that.questionSn != null) return false;
-        if (questionLable != null ? !questionLable.equals(that.questionLable) : that.questionLable != null)
+        if (questionLabel != null ? !questionLabel.equals(that.questionLabel) : that.questionLabel != null)
             return false;
         if (haidaxueSn != null ? !haidaxueSn.equals(that.haidaxueSn) : that.haidaxueSn != null) return false;
         if (questionContent != null ? !questionContent.equals(that.questionContent) : that.questionContent != null)
@@ -112,7 +112,7 @@ public class HQuestionEntity {
     @Override
     public int hashCode() {
         int result = questionSn != null ? questionSn.hashCode() : 0;
-        result = 31 * result + (questionLable != null ? questionLable.hashCode() : 0);
+        result = 31 * result + (questionLabel != null ? questionLabel.hashCode() : 0);
         result = 31 * result + (haidaxueSn != null ? haidaxueSn.hashCode() : 0);
         result = 31 * result + (questionContent != null ? questionContent.hashCode() : 0);
         result = 31 * result + (questionAnonymity != null ? questionAnonymity.hashCode() : 0);

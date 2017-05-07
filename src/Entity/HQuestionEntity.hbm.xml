@@ -9,7 +9,7 @@
             <column name="question_sn" sql-type="varchar(15)" length="15"/>
         </id>
         <property name="questionLable">
-            <column name="question_lable" sql-type="varchar(30)" length="30" not-null="true"/>
+            <column name="question_label" sql-type="varchar(30)" length="30" not-null="true"/>
         </property>
         <property name="haidaxueSn">
             <column name="haidaxue_sn" sql-type="varchar(15)" length="15" not-null="true"/>

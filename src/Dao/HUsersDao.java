@@ -14,17 +14,17 @@ import java.util.List;
  */
 public class HUsersDao {
 
-    public  void add(HUsersEntity hUsersEntity){
+    public  boolean add(HUsersEntity hUsersEntity){
         DaoFactory<HUsersEntity>daoFactory=new DaoFactory<>();
-        daoFactory.save(hUsersEntity);
+        return daoFactory.save(hUsersEntity);
     }
-    public  void update(HUsersEntity hUsersEntity){
+    public  boolean update(HUsersEntity hUsersEntity){
         DaoFactory<HUsersEntity>daoFactory=new DaoFactory<>();
-        daoFactory.update(hUsersEntity);
+        return daoFactory.update(hUsersEntity);
     }
-    public  void delete(HUsersEntity hUserEntity){
+    public  boolean delete(HUsersEntity hUserEntity){
         DaoFactory<HUsersEntity>daoFactory=new DaoFactory<>();
-        daoFactory.delete(hUserEntity);
+        return daoFactory.delete(hUserEntity);
     }
     /*
     * @Param:实体类对象
@@ -58,7 +58,7 @@ public class HUsersDao {
     public  List<HUsersEntity> list(){
         HUsersEntity hUsersEntity=new HUsersEntity();
         DaoFactory<HUsersEntity>daoFactory=new DaoFactory<>();
-        List result=daoFactory.cursor(hUsersEntity,"select * from h_users",HUsersEntity.class);
+        List<HUsersEntity>result=daoFactory.cursor(hUsersEntity,"select * from h_users",HUsersEntity.class);
 
         return result;
 

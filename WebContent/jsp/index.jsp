@@ -21,61 +21,46 @@
 		id : 'picBox',
 		pattern : 'mF_fancy'
 	})
+</script> 
+<script>
+function getAllQuestions(){
+	$.ajax({  
+        url: "GetAllQuestionsServlet",  //servlet mapping + 传参  ——  servlet中request.get获取
+        type: "post",  
+        dataType: "json",  
+        timeout: 1000,  
+        cache: false,  
+        async: false,
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                },  //错误执行方法    
+        success: showAllQuestions111 //成功执行方法          
+    }); 
+}
+
+function showAllQuestions111(data){  
+    if(data == null){     //data返回值内容  servlet中用response.set来返回  还要定义好response头
+        alert(" 暂无信息");
+    }
+    else if(data == ""){
+    	alert("暂无信息")
+    }
+    else{
+    	var json = eval(data);
+    	$.each(json, function(index, item){                          //循环获取数据  
+        $listView = $("<li><a href = 'questionDetail.jsp?question_sn="+json[index].question_sn>+"'><img src = '../images/"+json[index].user_pic+"' />"+ 
+				"<h2>"+json[index].question_label+"</h2>"+ 
+				"<p>"+json[index].question_content+"</p>"+"</li>");
+        $find("#showUUU").append($listView); 
+    	 });//forEach
+    }//else
+}//function 
 </script>
-	<script type="application/javascript">
-		//就是做一个Ajax请操作
-        function loadXMLDoc()
-        {
-            var xmlhttp;
-            var jsonArray;
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function()
-            {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                    jsonArray=xmlhttp.responseText;//we get json Data here
-                }
-            }
-
-            xmlhttp.open("GET","/ajax/demo_get.asp",true);
-            xmlhttp.send();
-            showQuestion("showQuestions",jsonArray);//then tansform it to showQuestion function
-        }
-
-	</script>
-	<script>
-		showQuestion(obj,json)
-        {
-            var ul = document.getElementById(obj);
-			var jsonArray=json;//get json data,
-			//eval 进行相关操作。
-            //添加 li
-            for (var i = 0; i < cars.length; i++){
-				var li = document.createElement("li");
-				var a=document.createElement("a");
-				var img=document.createElement("")
-				//添加 img
-				var para = document.createElement("p");
-				var node = document.createTextNode("这是新段落。");
-				para.appendChild(node);
-				li.appendChild(para);
-				ul.appendChild(li);
-        	}
-		}
-
-
-
-	</script>
 </head>
-<body onload="showQuestions('showQuestions')">
-<div data-role="page" data-theme="a" data-title="main" id="main">
+<body>
+<div data-role="page" data-theme="a" data-title="嗨大学" id="index">
 		<!--page开始 -->
 		<div data-role="header" data-position="fixed">
 			<!--header开始 -->
@@ -150,17 +135,20 @@
 		
 		
 		<div data-role="ui-content">
-			<ul data-role="listview" id="showQuestions">
-				<!-- 循环开始 -->
-					<li><a>
-				<img src="../images/t6.jpg" width="120" height="90"
+			<ul data-role="listview" id = "showUUU">
+				<!-- 商品循环开始 -->
+			</ul>
+			<ul data-role="listview" id = "showUUU">
+				<!-- 商品循环开始 --> 
+				<li><a href="details.jsp"> 
+				<img src="../images/t3.jpg" width="120" height="90"
 						border="1" />
 						<h2>类型: 填报志愿</h2>
 						<p>
 							 概述: 我妈让我学医 我爸要我学机械要死了要死了咋办啊我自己啥也不知道啊
 						</p>
-				</a></li>
-			</ul>
+				</a> </li> 
+				</ul>
 		</div>
 		<!-- ui-content 结束 -->
 
@@ -169,11 +157,10 @@
 				<ul>
 					<li><a href="#" data-icon="home" class="ui-btn-active"><img
 							id="myFont" >首页</a></li>
-					<li><a href="#list" data-icon="bullets"><img id="myFont">分类</a></li>
-					<li><a href="showCart.jsp" data-icon="shop"><img
+					<li><a href="specialProfile.jsp" data-icon="bullets"><img id="myFont">大神档案</a></li>
+					<li><a href="showCollections.jsp" data-icon="shop"><img
 							id="myFont">收藏</a></li>
-					<li><a href="login_success.jsp" data-icon="user"><img id="myFont"
-							>我的</a></li>
+					<li><a href="ihaidaxue.jsp" data-icon="user"><img id="myFont">我的</a></li>
 				</ul>
 			</div>
 			<!--navbar结束 -->

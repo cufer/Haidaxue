@@ -6,7 +6,8 @@
 
     <class name="Entity.HUsersEntity" table="h_users" schema="aaa">
         <id name="haidaxueSn">
-            <column name="haidaxue_sn" sql-type="varchar(15)" length="15"/>
+            <column name="haidaxue_sn" sql-type="varchar(15)" length="15"
+            />
         </id>
         <property name="userName">
             <column name="user_name" sql-type="varchar(30)" length="30" not-null="true"/>
@@ -47,6 +48,13 @@
         <property name="originSchool">
             <column name="origin_school" sql-type="varchar(30)" length="30" not-null="false"/>
         </property>
+        <property name="userType">
+            <column name="user_type" sql-type="varchar(3)" length="3" not-null="false"/>
+        </property>
+        <property name="userPic">
+            <column name="user_pic" sql-type="mediumblob" not-null="false"/>
+        </property>
     </class>
+
 
 </hibernate-mapping>

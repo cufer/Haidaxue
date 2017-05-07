@@ -1,8 +1,13 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-ear" name="haidaxueMobile:ear exploded">
+  <artifact type="exploded-ejb" name="haidaxueMobile:ear exploded">
     <output-path>$PROJECT_DIR$/classes/artifacts/haidaxueMobile_ear_exploded</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="haidaxueMobile/javaeeApplication/javaEEApplication" />
+      <element id="javaee-facet-resources" facet="haidaxueMobile/javaeeApplication/javaEEApplication" />
+      <element id="javaee-facet-resources" facet="haidaxueMobile/web/Web" />
+      <element id="library" level="application" name="Java EE 6-Java EE 6" />
+      <element id="library" level="application" name="mysql-connector-java-5.1.39-bin" />
+      <element id="artifact" artifact-name="haidaxueMobile:javaEEApplication exploded" />
     </root>
   </artifact>
 </component>

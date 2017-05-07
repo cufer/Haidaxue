@@ -15,18 +15,18 @@ public class HAnswersDao {
     public List getAnswerByHaidaxue_sn(HAnswersEntity hAnswersEntity) {
         DaoFactory<HAnswersEntity> daoFactory = new DaoFactory<>();
         String haidaxueSn = hAnswersEntity.getHaidaxueSn();
-        List result = daoFactory.cursor(hAnswersEntity, "select * from h_answers where haidaxue_sn='" + haidaxueSn + "'", HAnswersEntity.class);
+        List<HAnswersEntity>result = daoFactory.cursor(hAnswersEntity, "select * from h_answers where haidaxue_sn='" + haidaxueSn + "'", HAnswersEntity.class);
         return result;
     }
 
     public List getAnswerByQuestion_sn(HAnswersEntity hAnswersEntity) {
         DaoFactory<HAnswersEntity> daoFactory = new DaoFactory<>();
         String questionSn = hAnswersEntity.getQuestionSn();
-        List result = daoFactory.cursor(hAnswersEntity, "select * from h_answers where question_sn='" + questionSn + "'", HAnswersEntity.class);
+        List<HAnswersEntity>result = daoFactory.cursor(hAnswersEntity, "select * from h_answers where question_sn='" + questionSn + "'", HAnswersEntity.class);
         return result;
     }
 
-    public void provideAnswer(String haidaxueSn, String questionSn, String answersContent, Boolean answersAnonymity) {
+    public boolean provideAnswer(String haidaxueSn, String questionSn, String answersContent, Boolean answersAnonymity) {
         HAnswersEntity hAnswersEntity = new HAnswersEntity();
         hAnswersEntity.setHaidaxueSn(haidaxueSn);
         hAnswersEntity.setAnswersAnonymity(answersAnonymity);
@@ -35,7 +35,7 @@ public class HAnswersDao {
         hAnswersEntity.setAnswersSn("123");
         hAnswersEntity.setAnswersDate(Date.valueOf(LocalDate.now()));
         DaoFactory<HAnswersEntity> daoFactory = new DaoFactory<>();
-        daoFactory.save(hAnswersEntity);
+        return daoFactory.save(hAnswersEntity);
     }
 
 }

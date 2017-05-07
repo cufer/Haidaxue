@@ -2,23 +2,34 @@ package Dao;
 
 import Entity.HCollectionsEntity;
 
+import java.util.List;
+
 /**
  * Created by panyunyi on 2017/5/3.
  */
 public class HCollectionsDao {
-    public void addCollections(String haidaxueSn,String questionSn,String answersSn){
+    public boolean addCollections(String haidaxueSn,String questionSn,String answersSn){
         HCollectionsEntity hCollectionsEntity=new HCollectionsEntity();
         hCollectionsEntity.setHaidaxueSn(haidaxueSn);
         hCollectionsEntity.setQuestionSn(questionSn);
         DaoFactory<HCollectionsEntity>daoFactory=new DaoFactory<>();
-        daoFactory.save(hCollectionsEntity);
+        return daoFactory.save(hCollectionsEntity);
     }
-    public void deleteCollections(String haidaxueSn,String questionSn,String answerSn){
+    public boolean deleteCollections(String haidaxueSn,String questionSn,String answerSn){
         HCollectionsEntity hCollectionsEntity=new HCollectionsEntity();
         hCollectionsEntity.setHaidaxueSn(haidaxueSn);
         hCollectionsEntity.setQuestionSn(questionSn);
         DaoFactory<HCollectionsEntity>daoFactory=new DaoFactory<>();
-        daoFactory.delete(hCollectionsEntity);
+        return daoFactory.delete(hCollectionsEntity);
     }
+    /*
+    * List getAllCollection()
+    * */
+    public List getAllCollection(){
+        DaoFactory<HCollectionsEntity> daoFactory=new DaoFactory<>();
+        HCollectionsEntity hCollectionsEntity=new HCollectionsEntity();
+        List<HCollectionsEntity> list=daoFactory.cursor(hCollectionsEntity,"select * from q_collecitons",HCollectionsEntity.class);
 
+        return list;
+    }
 }

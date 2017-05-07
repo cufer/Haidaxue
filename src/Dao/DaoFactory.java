@@ -1,16 +1,13 @@
 package Dao;
 
-import Entity.HUsersEntity;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.query.Query;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -18,11 +15,11 @@ import java.util.List;
  */
 class DaoFactory<T> {
 
-        /*
-    * function：增加
-    * param：实体类对象
-    * */
-    public  String save(T u) {
+    /*
+* function：增加
+* param：实体类对象
+* */
+    public boolean save(T u) {
         String i;
 
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -30,22 +27,32 @@ class DaoFactory<T> {
         // 2. 根据服务注册类创建一个元数据资源集，同时构建元数据并生成应用一般唯一的的session工厂
         SessionFactory sessionFactory = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction t = null;
+        try {
+            // 从会话工厂获取一个session
+            t = session.beginTransaction();
+            i = (String) session.save(u);
+            t.commit();
+        } catch (HibernateException herror) {
+            t.rollback();
+            return false;
 
+        } finally {
+            session.close();
 
-        Session session = sessionFactory.openSession();// 从会话工厂获取一个session
-        Transaction t = session.beginTransaction();
-        i = (String) session.save(u);
-        t.commit();
-        session.close();
+        }
+
 
         //System.out.println(u.getCurrentLocation());
-        return i;
+        return true;
     }
+
     /*
     * function：删除
     * param：实体类对象
     * */
-    public  void delete(T u){
+    public boolean delete(T u) {
         String info;
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build();
@@ -53,34 +60,54 @@ class DaoFactory<T> {
         SessionFactory sessionFactory = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory();
 
-
+        Transaction t = null;
         Session session = sessionFactory.openSession();// 从会话工厂获取一个session
-        Transaction t = session.beginTransaction();
 
-        session.delete(u);
-        t.commit();
-        session.close();
+        try {
+            t = session.beginTransaction();
+
+            session.delete(u);
+            t.commit();
+        } catch (HibernateException herror) {
+            t.rollback();
+            return false;
+
+        } finally {
+            session.close();
+
+        }
+        return true;
 
     }
+
     /*
     * function：更新
     * param：实体类对象
     * */
-    public void update(T u){
+    public boolean update(T u) {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build();
         // 2. 根据服务注册类创建一个元数据资源集，同时构建元数据并生成应用一般唯一的的session工厂
         SessionFactory sessionFactory = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory();
 
-
+        Transaction t = null;
         Session session = sessionFactory.openSession();// 从会话工厂获取一个session
-        Transaction t = session.beginTransaction();
-        session.update(u);
-        t.commit();
-        session.close();
+        try {
+             t= session.beginTransaction();
+            session.update(u);
+            t.commit();
+        } catch (HibernateException herror) {
+            t.rollback();
+            return false;
+
+        } finally {
+            session.close();
+        }
+        return true;
     }
-    public List cursor(T u,String s,Class aclass){
+
+    public List cursor(T u, String s, Class aclass) {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build();
         // 2. 根据服务注册类创建一个元数据资源集，同时构建元数据并生成应用一般唯一的的session工厂
@@ -90,16 +117,16 @@ class DaoFactory<T> {
 
         Session session = sessionFactory.openSession();// 从会话工厂获取一个session
         Transaction t = session.beginTransaction();
-        SQLQuery sqlQuery=session.createSQLQuery(s);
+        SQLQuery sqlQuery = session.createSQLQuery(s);
         List list;
         //if 做简单的查询
         //else 做统计
-        if(aclass!=null){
+        if (aclass != null) {
             sqlQuery.addEntity(aclass);
-            list=sqlQuery.getResultList();
-        }else{
-            int count=((Number)sqlQuery.uniqueResult()).intValue();
-            list=new ArrayList<Integer>();
+            list = sqlQuery.getResultList();
+        } else {
+            int count = ((Number) sqlQuery.uniqueResult()).intValue();
+            list = new ArrayList<Integer>();
             list.add(count);
         }
 
@@ -107,4 +134,8 @@ class DaoFactory<T> {
         session.close();
         return list;
     }
+/*    public boolean generateSn(){
+        Date date=Date.valueOf(LocalDate.now());
+    }*/
+
 }
