@@ -4,13 +4,12 @@ import javax.persistence.*;
 import java.util.Arrays;
 
 /**
- * Created by panyunyi on 2017/5/6.
+ * Created by panyunyi on 2017/5/7.
  */
 @Entity
 @Table(name = "h_users", schema = "aaa", catalog = "")
 public class HUsersEntity {
     private String userName;
-    private String schoolName;
     private String majorName;
     private String departmentalName;
     private Integer userAge;
@@ -26,6 +25,8 @@ public class HUsersEntity {
     private Integer level;
     private String userType;
     private byte[] userPic;
+    private String highschoolName;
+    private String collegeName;
 
     @Basic
     @Column(name = "user_name", nullable = true, length = 30)
@@ -35,16 +36,6 @@ public class HUsersEntity {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    @Basic
-    @Column(name = "school_name", nullable = true, length = 30)
-    public String getSchoolName() {
-        return schoolName;
-    }
-
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
     }
 
     @Basic
@@ -197,6 +188,26 @@ public class HUsersEntity {
         this.userPic = userPic;
     }
 
+    @Basic
+    @Column(name = "highschool_name", nullable = true, length = 30)
+    public String getHighschoolName() {
+        return highschoolName;
+    }
+
+    public void setHighschoolName(String highschoolName) {
+        this.highschoolName = highschoolName;
+    }
+
+    @Basic
+    @Column(name = "college_name", nullable = true, length = 30)
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -205,7 +216,6 @@ public class HUsersEntity {
         HUsersEntity that = (HUsersEntity) o;
 
         if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (schoolName != null ? !schoolName.equals(that.schoolName) : that.schoolName != null) return false;
         if (majorName != null ? !majorName.equals(that.majorName) : that.majorName != null) return false;
         if (departmentalName != null ? !departmentalName.equals(that.departmentalName) : that.departmentalName != null)
             return false;
@@ -224,6 +234,9 @@ public class HUsersEntity {
         if (level != null ? !level.equals(that.level) : that.level != null) return false;
         if (userType != null ? !userType.equals(that.userType) : that.userType != null) return false;
         if (!Arrays.equals(userPic, that.userPic)) return false;
+        if (highschoolName != null ? !highschoolName.equals(that.highschoolName) : that.highschoolName != null)
+            return false;
+        if (collegeName != null ? !collegeName.equals(that.collegeName) : that.collegeName != null) return false;
 
         return true;
     }
@@ -231,7 +244,6 @@ public class HUsersEntity {
     @Override
     public int hashCode() {
         int result = userName != null ? userName.hashCode() : 0;
-        result = 31 * result + (schoolName != null ? schoolName.hashCode() : 0);
         result = 31 * result + (majorName != null ? majorName.hashCode() : 0);
         result = 31 * result + (departmentalName != null ? departmentalName.hashCode() : 0);
         result = 31 * result + (userAge != null ? userAge.hashCode() : 0);
@@ -247,6 +259,8 @@ public class HUsersEntity {
         result = 31 * result + (level != null ? level.hashCode() : 0);
         result = 31 * result + (userType != null ? userType.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(userPic);
+        result = 31 * result + (highschoolName != null ? highschoolName.hashCode() : 0);
+        result = 31 * result + (collegeName != null ? collegeName.hashCode() : 0);
         return result;
     }
 }

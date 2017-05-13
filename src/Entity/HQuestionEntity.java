@@ -1,13 +1,12 @@
 package Entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 /**
- * Created by panyunyi on 2017/5/3.
+ * Created by panyunyi on 2017/5/6.
  */
 @Entity
-@Table(name = "h_question", schema = "aaa")
+@Table(name = "h_question", schema = "aaa", catalog = "")
 public class HQuestionEntity {
     private String questionSn;
     private String questionLabel;
@@ -15,7 +14,7 @@ public class HQuestionEntity {
     private String questionContent;
     private Boolean questionAnonymity;
     private Boolean questionBonus;
-    private Date questionDate;
+    private String questionDate;
 
     @Id
     @Column(name = "question_sn", nullable = false, length = 15)
@@ -78,12 +77,12 @@ public class HQuestionEntity {
     }
 
     @Basic
-    @Column(name = "question_date", nullable = true)
-    public Date getQuestionDate() {
+    @Column(name = "question_date", nullable = true, length = -1)
+    public String getQuestionDate() {
         return questionDate;
     }
 
-    public void setQuestionDate(Date questionDate) {
+    public void setQuestionDate(String questionDate) {
         this.questionDate = questionDate;
     }
 

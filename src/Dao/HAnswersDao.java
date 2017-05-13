@@ -26,14 +26,7 @@ public class HAnswersDao {
         return result;
     }
 
-    public boolean provideAnswer(String haidaxueSn, String questionSn, String answersContent, Boolean answersAnonymity) {
-        HAnswersEntity hAnswersEntity = new HAnswersEntity();
-        hAnswersEntity.setHaidaxueSn(haidaxueSn);
-        hAnswersEntity.setAnswersAnonymity(answersAnonymity);
-        hAnswersEntity.setQuestionSn(questionSn);
-        hAnswersEntity.setAnswersContent(answersContent);
-        hAnswersEntity.setAnswersSn("123");
-        hAnswersEntity.setAnswersDate(Date.valueOf(LocalDate.now()));
+    public boolean provideAnswer(HAnswersEntity hAnswersEntity) {
         DaoFactory<HAnswersEntity> daoFactory = new DaoFactory<>();
         return daoFactory.save(hAnswersEntity);
     }

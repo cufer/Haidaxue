@@ -16,25 +16,26 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 
-@WebServlet("/GetAllQusetionServlet")
 public class GetAllQusetionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    HQuestionDao hQuestionDao = new HQuestionDao();
-	    List<HQuestionEntity> allQuestionList = hQuestionDao.getAllQuestion();
 
-	    JSONArray jsonArray = new JSONArray();
-	    for(HQuestionEntity hqe : allQuestionList){
-	    	JSONObject jsonobject = JSONObject.fromObject(hqe);
-	    	jsonArray.add(jsonobject);
-	    }
-	    response.setContentType("application/json; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.write(jsonArray.toString());
-	}
+			HQuestionDao hQuestionDao = new HQuestionDao();
+			List<HQuestionEntity> allQuestionList = hQuestionDao.getAllQuestion();
+
+			JSONArray jsonArray = new JSONArray();
+			for (HQuestionEntity hqe : allQuestionList) {
+				JSONObject jsonobject = JSONObject.fromObject(hqe);
+				jsonArray.add(jsonobject);
+			}
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.write(jsonArray.toString());
+			System.out.println("array is like " + jsonArray.toString());
+		}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

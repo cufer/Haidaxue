@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="haidaxue1_5:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/haidaxue1_5_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="haidaxue1_5/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="haidaxue1_5" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="JPA 2.0-2.0" />
+          <element id="library" level="project" name="Hibernate 5.2.9-5.2.9" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.39-bin" />
+          <element id="library" level="project" name="commons-beanutils" />
+        </element>
+      </element>
+      <element id="library" level="project" name="mysql-connector-java-5.1.39-bin" />
+      <element id="library" level="project" name="Hibernate 5.2.9-5.2.9" />
+      <element id="javaee-facet-resources" facet="haidaxue1_5/javaeeApplication/javaEEApplication" />
+      <element id="javaee-facet-resources" facet="haidaxue1_5/web/Web" />
+    </root>
+  </artifact>
+</component>

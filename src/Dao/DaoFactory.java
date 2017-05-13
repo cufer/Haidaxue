@@ -36,6 +36,7 @@ class DaoFactory<T> {
             t.commit();
         } catch (HibernateException herror) {
             t.rollback();
+            herror.printStackTrace();
             return false;
 
         } finally {
@@ -70,6 +71,7 @@ class DaoFactory<T> {
             t.commit();
         } catch (HibernateException herror) {
             t.rollback();
+            herror.printStackTrace();
             return false;
 
         } finally {
@@ -99,6 +101,7 @@ class DaoFactory<T> {
             t.commit();
         } catch (HibernateException herror) {
             t.rollback();
+            herror.printStackTrace();
             return false;
 
         } finally {
@@ -125,9 +128,13 @@ class DaoFactory<T> {
             sqlQuery.addEntity(aclass);
             list = sqlQuery.getResultList();
         } else {
-            int count = ((Number) sqlQuery.uniqueResult()).intValue();
-            list = new ArrayList<Integer>();
-            list.add(count);
+//            int count = ((Number) sqlQuery.uniqueResult()).intValue();
+//            list = new ArrayList<Integer>();
+//            list.add(count);
+            list=null;
+            //sqlQuery.getQueryReturns();
+            //sqlQuery.executeUpdate();
+
         }
 
         t.commit();
